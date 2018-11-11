@@ -17,6 +17,7 @@ as they are stable.*
     * [React Router](#react-router-integration-(feature/react-router))
     * [Express Routing](#express-routing-/-api-(feature/express-routing))
     * [Redux](#redux-(feature/redux))
+    * [Material-UI](#material-ui-(feature/material-ui))
 * [Development](#development)
 * [Building for production](#building-for-production)
 * [Changelog](#changelog)
@@ -55,6 +56,9 @@ an API to work alongside your frontend application.
 This example shows how to integrate [redux](https://redux.js.org) along with server-side rendering
 as well as hot-reloading. It features a simple store with preloaded state
 from the server as well as state hydration on the client.
+
+### Material-UI (feature/material-ui)
+This example includes the [Material-UI](www.material-ui.com) design library. 
 
 ## Development
 To start development, follow these steps:

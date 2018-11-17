@@ -38,20 +38,12 @@ export default ({ clientStats }) => async (req, res) => {
     const appString = ReactDOM.renderToString(app);
     const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
-<<<<<<< HEAD
     const { js, styles } = flushChunks(clientStats, { chunkNames });
-=======
-    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames });
->>>>>>> feature/redux-catchup
     const document = createDocument({
         appString,
         js,
         styles,
-<<<<<<< HEAD
-=======
-        cssHash,
         preloadedState: JSON.stringify(preloadedState),
->>>>>>> feature/redux-catchup
         helmet,
     });
 

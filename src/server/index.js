@@ -7,7 +7,20 @@ import { Provider } from 'react-redux';
 
 import configureStore from '../shared/core/configure-store';
 import createDocument from './document';
+import { StaticRouter } from 'react-router';
+
 import App from '../shared/App';
+import { SheetsRegistry } from 'jss';
+
+import JssProvider from 'react-jss/lib/JssProvider';
+import {
+    MuiThemeProvider,
+    createMuiTheme,
+    createGenerateClassName,
+} from '@material-ui/core/styles';
+
+import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
 
 /**
  * Provides the server side rendered app. In development environment, this method is called by
@@ -29,23 +42,75 @@ export default ({ clientStats }) => async (req, res) => {
     };
     const store = configureStore(preloadedState);
 
+
+    const sheetsRegistry = new SheetsRegistry();
+
+    // Create a sheetsManager instance.
+    const sheetsManager = new Map();
+
+    // Create a theme instance.
+    const theme = createMuiTheme({
+        palette: {
+            primary: green,
+            accent: red,
+            type: 'light',
+        },
+    });
+
+    const generateClassName = createGenerateClassName();
+    const context = {};
+
+
     const app = (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
+        <StaticRouter
+            location={req.url}
+            context={context}>
+            <Provider store={store}>
+                <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
+                    <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
+
+                        <App />
+
+                    </MuiThemeProvider>
+                </JssProvider>
+            </Provider>
+        </StaticRouter>);
+
+
+    // const app = (<StaticRouter
+    //     location={req.url}
+    //     context={context}>
+    //     <App />
+    // </StaticRouter>);
+
+
 
     const appString = ReactDOM.renderToString(app);
     const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
     const { js, styles } = flushChunks(clientStats, { chunkNames });
+    const jss = sheetsRegistry.toString();
     const document = createDocument({
         appString,
         js,
         styles,
         preloadedState: JSON.stringify(preloadedState),
         helmet,
+        jss,
+
     });
 
-    res.set('Content-Type', 'text/html').end(document);
+    /*
+     * See https://reacttraining.com/react-router/web/guides/server-rendering for details
+     * on this configuration.
+     */
+    if (context.url) {
+        res.writeHead(301, {
+            Location: context.url
+        });
+        res.end();
+    } else {
+
+        res.set('Content-Type', 'text/html').end(document);
+    }
 };

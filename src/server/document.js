@@ -4,6 +4,7 @@ export default ({
     styles,
     helmet,
     preloadedState,
+    jss,
 }) => `
     <!doctype html>
     <html>
@@ -16,14 +17,14 @@ export default ({
         ${helmet.title.toString()}
     </head>
     <body>
-    hello world
-
+   
       <div id="react-root">${appString}</div>
       <script>
       window.__PRELOADED_STATE__ = ${preloadedState}
     </script>
       ${js}
-      
+      <style id="jss-server-side">${jss}</style>
+
     </body>
     </html>
 `;

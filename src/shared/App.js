@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Switch, Route } from 'react-router-dom';
+
+import Home from './components/Home';
+import About from './components/About';
+import NotFound from './components/NotFound';
+
 import './app.styl';
 
 import { addTodo } from './actions/todos';
 import Helmet from 'react-helmet';
 
+import { Typography, Card, withStyles } from '@material-ui/core';
 
 import UniversalComponent from './components/UniversalComponent';
 /**
@@ -25,11 +32,12 @@ const mapStateToProps = ({ todos }) => ({
  * The `App` component is the entry point for the react app.
  * It is rendered on the client as well as on the server.
  *
- * You can start developing your react app here.
- */
-@connect(mapStateToProps, {
-    addTodo
-})
+ * This is also the entry point for react router, declare any
+ * of your top-level routes here.
+//  */
+// @connect(mapStateToProps, {
+//     addTodo
+// })
 class App extends Component {
 
     constructor(props) {
@@ -42,28 +50,63 @@ class App extends Component {
         this.props.addTodo(`Random Todo #${Math.round(Math.random() * 100)}`);
     };
 
+    componentDidUpdate() {
+        console.log("did update");
+    }
+
+
     render() {
-        const { todos } = this.props;
-        console.log(todos);
+
+        const { classes, todos } = this.props;
         return (
+
             <div>
-                <Helmet>
-                    <title>App Component | React Universal</title>
-                </Helmet>
+                <div>
+                    <Helmet>
+                        <title>App Component | React Universal</title>
+                    </Helmet>
 
-                <h1>Welcome to React Fiber with Redux.</h1>
-                <ul>
-                    {todos.map(todo =>
-                        <li key={todo.id}>{todo.name}</li>
-                    )}
-                </ul>
-                <button onClick={this.handleAddTodoClick}>Add random todo</button>
+                </div >
 
-                <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="getting-started" />
+
+                <Card elevation={24} className={classes.card}>
+                    <Typography color="primary" variant="h1"> Hello world! </Typography>
+                    <UniversalComponent name="getting-started" />
+
+                    {/* <ul>
+                        {todos.map(todo =>
+                            <li key={todo.id}>{todo.name}</li>
+                        )}
+                    </ul> */}
+                    <button onClick={this.handleAddTodoClick}>Add random todo</button>
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route path='/about' component={About} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Card>
+
+
             </div >
+
+            // <Switch>
+            //     <Route exact path='/' component={Home} />
+            //     <Route path='/about' component={About} />
+            //     <Route component={NotFound} />
+            // </Switch>
+
         );
     }
 }
 
-export default App; 
+const styles = theme => ({
+    root: {
+
+    },
+
+    card: {
+        padding: 20,
+    }
+})
+
+export default withStyles(styles)(App);

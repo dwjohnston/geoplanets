@@ -2,11 +2,13 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import App from '../shared/App';
 import configureStore from '../shared/core/configure-store';
 console.log(window.__PRELOADED_STATE__);
 const store = configureStore(window.__PRELOADED_STATE__, true);
-//delete window.__PRELOADED_STATE__;
+delete window.__PRELOADED_STATE__;
 
 /**
  * Renders a react component into the #react-root div container.
@@ -17,9 +19,12 @@ const store = configureStore(window.__PRELOADED_STATE__, true);
  */
 const render = (Component) => {
     hydrate(
-        <Provider store={store}>
-            <Component />
-        </Provider>,
+        <Router>
+            <Provider store={store}>
+                <Component />
+            </Provider>
+        </Router>
+        ,
         document.getElementById('react-root')
     );
 };

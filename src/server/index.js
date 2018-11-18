@@ -32,13 +32,10 @@ import red from '@material-ui/core/colors/red';
  */
 export default ({ clientStats }) => async (req, res) => {
     const preloadedState = {
-        todos: [{
-            id: 1,
-            name: 'Walk the dog'
-        }, {
-            id: 2,
-            name: 'Buy butter from the store'
-        }]
+        slider: {
+            name: "slider",
+            value: 4
+        }
     };
     const store = configureStore(preloadedState);
 

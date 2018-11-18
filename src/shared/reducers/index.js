@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import todos from './todos';
-
+import slider from "./slider";
 export default combineReducers({
-    todos
+
+    slider: slider,
 });

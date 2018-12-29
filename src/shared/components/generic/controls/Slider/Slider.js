@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MuiSlider from '@material-ui/lab/Slider';
-import { Typography } from '@material-ui/core';
+import { Typography, Card } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import { randomStep } from "davids-toolbox";
@@ -37,28 +37,30 @@ class Slider extends Component {
         this.setState({
             value: v
         });
-        this.props.onChange(this.props.id, v)
+        this.props.onChange([this.props.id], v)
     }
 
     render() {
-        const { classes, min, max, step, label, id } = this.props;
-        return <div className={classes.root}> <div className={classes.sliderWrapper}>
-            <MuiSlider
-                classes={{ root: classes.sliderRoot, container: classes.slider }}
-                vertical
-                value={this.state.value}
-                onChange={this.handleChange}
-                min={min}
-                max={max}
-                step={step}
-                aria-labelledby={`label-${id}`}
-                color="secondary"
-            />
-        </div>
-        <Typography color="inherit" id={`value-${id}`}>{Number.parseFloat(this.state.value).toPrecision(3)}</Typography>
-        <Typography color="inherit" id={`label-${id}`}>{label}</Typography>
+        const { classes, min, max, step, randMin, randMax, label, id } = this.props;
+        return <Card className={classes.root} elevantion={2}>
+            <Typography color="inherit" id={`label-${id}`}>{label}</Typography>
 
-        </div >;
+            <div className={classes.sliderWrapper}>
+                <MuiSlider
+                    classes={{ root: classes.sliderRoot, container: classes.slider }}
+                    vertical
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    min={min}
+                    max={max}
+                    step={step}
+                    aria-labelledby={`label-${id}`}
+                    color="secondary"
+                />
+            </div>
+            <Typography color="inherit" id={`value-${id}`}>{Number.parseFloat(this.state.value).toPrecision(3)}</Typography>
+
+        </Card >;
     }
 }
 
@@ -73,13 +75,14 @@ Slider.propTypes = {
     id: PropTypes.string,
     onChange: PropTypes.func
 };
-const styles = {
+const styles = theme => ({
 
     root: {
         display: "flex",
         flexFlow: "column nowrap",
         alignItems: "center",
         height: 150,
+        margin: theme.spacing.unit
 
     },
     sliderWrapper: {
@@ -94,7 +97,7 @@ const styles = {
     sliderRoot: {
         width: "auto",
     }
-};
+});
 
 
 

@@ -11,6 +11,7 @@ import { AppBar, Tabs, Tab, Select, InputLabel, MenuItem, FormControl, Input } f
 import DynamicIcon from "../generic/DynamicIcon";
 import NoSSR from "react-no-ssr"
 import SettingsIcon from "@material-ui/icons/Settings";
+import Control from './Control';
 class Controls extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +19,11 @@ class Controls extends Component {
             selectedTab: 0,
             selectedAlgo: 0,
         };
+    }
+
+
+    handleParameterChange = (id, v) => {
+        console.log([this.props.algorithms[this.state.selectedAlgo].groups[this.state.selectedTab].id, ...id], v);
     }
 
     handleTabChange = (event, value) => {
@@ -40,7 +46,7 @@ class Controls extends Component {
 
         if (selectedTab === 0) return (
             <FormControl className={classes.formControl}>
-                {/* <InputLabel htmlFor="algorithm-select">Algorithm</InputLabel> */}
+                <InputLabel htmlFor="algorithm-select">Algorithm</InputLabel>
 
                 <Select
                     value={selectedAlgo}
@@ -59,8 +65,19 @@ class Controls extends Component {
 
             </FormControl>
         )
+        else {
+            return (<>
+                {algorithms[selectedAlgo].groups[selectedTab - 1].controls.map(
+                    (v, i) => <Control
+                        key={`${i}-{v.id}`}
+                        value={v}
+                        onChange={this.handleParameterChange} />
+                )
+                }
+            </>);
+        }
 
-        return (<span> nohthing </span>);
+        return (<span> nohthing </span >);
     }
 
     // handleChange = (e, v) => {
@@ -132,46 +149,7 @@ const mapStateToProps = (
 ) => {
     return {
 
-        algorithms: [
-            {
-                name: "algo 1",
-                groups: [
-                    {
-                        icon: "phone",
-                        label: "Phone",
-                        controls: [
-                            1, 2, 3
-                        ]
-                    },
-                    {
-                        icon: "phone",
-                        label: "Favourite",
-                        controls: [
-                            11, 12, 13
-                        ]
-                    }
-                ]
-            },
-            {
-                name: "algo 2",
-                groups: [
-                    {
-                        icon: "phone",
-                        label: "PersonPinIcon",
-                        controls: [
-                            11, 22, 33
-                        ]
-                    },
-                    {
-                        icon: "settings",
-                        label: "PersonPinIcon",
-                        controls: [
-                            12, 22, 32
-                        ]
-                    }
-                ]
-            }
-        ]
+
     };
 };
 

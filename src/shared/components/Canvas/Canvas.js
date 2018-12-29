@@ -38,8 +38,7 @@ class Canvas extends Component {
 
         const { classes } = this.props;
         return <div className={classes.root}>
-            <canvas width="770" height="130" ref={this.refLarge} />
-            <canvas width="770" height="130" ref={this.refLarge} />
+            <canvas className={classes.canvas} width="100" height="100" ref={this.refLarge} />
         </div>;
     }
 }
@@ -48,6 +47,9 @@ const styles = {
     root: {
         border: "solid 2px green",
     },
+    canvas: {
+        border: "dashed 1px black",
+    }
 };
 
 

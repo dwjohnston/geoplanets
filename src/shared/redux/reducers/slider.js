@@ -9,7 +9,7 @@ export default (
     action
 ) => {
     switch (action.type) {
-    case "SLIDER_UPDATE": {
+    case SLIDER_UPDATE: {
         return { ...action.payload }
     }
 

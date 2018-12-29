@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 
-import rootReducer from '../reducers';
+import rootReducer from '../redux/reducers';
 
 /**
  * This methods creates a redux store based on the root reducer.
@@ -20,8 +20,8 @@ export default (preloadedState, isClientSide) => {
 
     // this piece of code enables hot reload of state with redux
     if (process.env.NODE_ENV === 'development' && module.hot) {
-        module.hot.accept('../reducers', () => {
-            store.replaceReducer(require('../reducers').default);
+        module.hot.accept('../redux/reducers', () => {
+            store.replaceReducer(require('../redux/reducers').default);
         });
     }
 

@@ -13,6 +13,16 @@ export default ({
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         
+        <style> 
+            html, body, #react-root {
+                margin: 0; 
+                padding:0; 
+                height: 100vh; 
+                display: block; 
+                overflow: hidden;
+            }
+        </style> 
+
         ${styles}
         ${helmet.title.toString()}
     </head>

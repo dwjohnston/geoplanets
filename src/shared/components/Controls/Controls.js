@@ -12,6 +12,8 @@ import DynamicIcon from "../generic/DynamicIcon";
 import NoSSR from "react-no-ssr"
 import SettingsIcon from "@material-ui/icons/Settings";
 import Control from './Control';
+import { changeAlgoAction } from '../../redux/actions/algoChange';
+import randomParam from "./util/randomParam";
 class Controls extends Component {
     constructor(props) {
         super(props);
@@ -19,11 +21,22 @@ class Controls extends Component {
             selectedTab: 0,
             selectedAlgo: 0,
         };
+
+        this.randomAll();
     }
 
 
+    randomAll = () => {
+        this.props.algorithms[this.state.selectedAlgo].groups.forEach((algoGroup, i) => {
+            algoGroup.controls.forEach(control => {
+                this.props.updateParameter([algoGroup.id, control.id], randomParam(control));
+
+            });
+        });
+    }
+
     handleParameterChange = (id, v) => {
-        console.log([this.props.algorithms[this.state.selectedAlgo].groups[this.state.selectedTab].id, ...id], v);
+        this.props.updateParameter([this.props.algorithms[this.state.selectedAlgo].groups[this.state.selectedTab - 1].id, ...id], v);
     }
 
     handleTabChange = (event, value) => {
@@ -36,6 +49,9 @@ class Controls extends Component {
         this.setState({
             selectedAlgo: event.target.value
         });
+
+        this.props.updateSelectedAlgo(event.target.value);
+
     }
 
     renderTabContainer = (classes) => {
@@ -43,6 +59,9 @@ class Controls extends Component {
 
         const { selectedTab, selectedAlgo } = this.state;
         const { algorithms } = this.props;
+
+
+
 
         if (selectedTab === 0) return (
             <FormControl className={classes.formControl}>
@@ -66,11 +85,18 @@ class Controls extends Component {
             </FormControl>
         )
         else {
+
+
+            const algo = algorithms[selectedAlgo];
+            const tab = algo.groups[selectedTab - 1];
+
+
             return (<>
-                {algorithms[selectedAlgo].groups[selectedTab - 1].controls.map(
+                {tab.controls.map(
                     (v, i) => <Control
-                        key={`${i}-{v.id}`}
+                        key={`${i}-${tab.id}-${v.id}`}
                         value={v}
+                        initValue={this.props.controlState[tab.id][v.id]}
                         onChange={this.handleParameterChange} />
                 )
                 }
@@ -148,14 +174,14 @@ const mapStateToProps = (
     ownProps
 ) => {
     return {
-
-
+        controlState: state.controlState
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        sliderUpdate: (n, v) => dispatch(sliderUpdate(n, v))
+        updateSelectedAlgo: v => dispatch(changeAlgoAction(v)),
+        updateParameter: (id, v) => dispatch(sliderUpdate(id, v))
     };
 };
 export default connect(

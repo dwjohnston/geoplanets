@@ -13,10 +13,11 @@ class Slider extends Component {
     constructor(props) {
         super(props);
 
-        const value = randomStep(this.props.min, this.props.max, this.props.step);
-        this.state = { value: value };
+        console.log(props);
+        // const value = randomStep(this.props.min, this.props.max, this.props.step);
+        this.state = { value: props.initValue };
 
-        props.onChange(props.id, value);
+        //props.onChange(props.id, value);
     }
 
 

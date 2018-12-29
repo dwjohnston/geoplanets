@@ -10,13 +10,14 @@
     "build:client": "cross-env NODE_ENV=production webpack -p --config webpack/client.production.js",
     "build:server": "cross-env NODE_ENV=production webpack -p --config webpack/server.production.js",
     "build:node": "cross-env NODE_ENV=production webpack -p --config webpack/node.production.js",
-    "test": "jest",
+    "test": "jest --watchAll",
     "lint": "eslint src/**/*.js"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(css|styl)$": "identity-obj-proxy"
-    }
+    },
+    "testEnvironment": "node"
   },
   "keywords": [
     "ssr",
@@ -27,8 +28,8 @@
     "ejs"
   ],
   "author": {
-    "name": "Rico Herwig",
-    "email": "rherwig4711@gmail.com"
+    "name": "David Johnston",
+    "email": "david@blacksheepcode.com"
   },
   "license": "MIT",
   "dependencies": {
@@ -40,6 +41,8 @@
     "davids-toolbox": "^1.0.2",
     "express": "^4.16.0",
     "helmet": "^3.13.0",
+    "lodash": "^4.17.11",
+    "p5": "^0.7.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-helmet": "^5.2.0",

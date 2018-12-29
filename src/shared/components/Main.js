@@ -5,14 +5,18 @@ import Canvas from "./Canvas/Canvas";
 import { connect } from "react-redux";
 import Controls from "./Controls/Controls";
 import ThreeOrbits from '../geometry/algorithms/ThreeOrbits';
-
+import NoSSR from "react-no-ssr";
 const algorithms = [
     ThreeOrbits
 ]
 
 function Main({ classes }) {
     return (<div className={classes.root}>
-        <Canvas />
+        <NoSSR>
+            <Canvas
+                algorithms={algorithms.map(v => v.calc)}
+            />
+        </NoSSR>
         <Controls algorithms={algorithms.map(v => v.renderHint)} />
     </div>)
 }
@@ -23,7 +27,8 @@ const styles = theme => ({
     root: {
         display: "flex",
         flexFlow: "column nowrap",
-        alignItems: "stretch"
+        alignItems: "stretch",
+        height: "100vh",
     },
 
     card: {
@@ -37,7 +42,6 @@ const mapStateToProps = (
     ownProps
 ) => {
     return {
-        sliderValue: state.slider.value
     };
 };
 

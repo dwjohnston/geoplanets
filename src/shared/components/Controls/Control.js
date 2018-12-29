@@ -4,11 +4,11 @@ import { Card } from '@material-ui/core';
 import * as ValueType from "../../geometry/renderHints/ValueTypes";
 import Slider from '../generic/controls/Slider/Slider';
 
-const Control = ({ classes, value, onChange }) => {
+const Control = ({ classes, value, ...rest }) => {
     return (
         <Card elevation={0} className={classes.root}>
             {value.type === ValueType.RANGE &&
-                <Slider {...value} onChange={onChange} />
+                <Slider {...value} {...rest} />
             }
         </Card>
     );

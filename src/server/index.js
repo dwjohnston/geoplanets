@@ -32,9 +32,11 @@ import red from '@material-ui/core/colors/red';
  */
 export default ({ clientStats }) => async (req, res) => {
     const preloadedState = {
-        slider: {
-            name: "slider",
-            value: 4
+        controlState: {
+
+        },
+        algorithm: {
+            selectedAlgo: 0
         }
     };
     const store = configureStore(preloadedState);

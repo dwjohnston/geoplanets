@@ -11,7 +11,15 @@ const renderHint = {
     ]
 }
 
-function calc(t, controlsPackage, statePackage) {
+function calc(t, controlsPackage, statePackage, p5) {
+
+    console.log(t, controlsPackage, statePackage);
+
+    const cp1 = Math.sin()
+
+    return [
+
+    ]
 
 }
 

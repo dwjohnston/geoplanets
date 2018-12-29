@@ -8,10 +8,10 @@ export const SLIDER_UPDATE = 'SLIDER_UPDATE';
  * @param name Name of the slider
  * @returns {{type: string, payload: {name: *, value: *}}} SLIDER_UPDATE action
  */
-export const sliderUpdate = (name, value) => ({
+export const sliderUpdate = (id, value) => ({
     type: SLIDER_UPDATE,
     payload: {
-        name: name,
+        id: id,
         value: value,
     }
 });

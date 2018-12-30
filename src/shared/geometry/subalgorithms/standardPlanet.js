@@ -17,7 +17,7 @@ export default (id = "planet", label = "planet", icon = "all_out") => ({
 
         controls: [
             ...speed(),
-            zeroToOne("distance", "Distance"),
+            zeroToOne("distance", "Distance", 0.5),
             ...color(),
         ]
     }

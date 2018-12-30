@@ -1,35 +1,41 @@
-const s = function (sketch) {
+const s = function (p) {
 
-    console.log(sketch);
-    var x = 100;
-    var y = 100;
-
-    sketch.setup = function () {
-        sketch.createCanvas(200, 200);
+    p.setup = function () {
+        p.createCanvas(200, 200);
+        p.background(0);
+        p.temp = p.createGraphics(200, 200);
+        p.perm = p.createGraphics(200, 200);
     };
 
 
-    let t = 0;
-    let controlsPackage = {};
-    let statePackage = {};
-    let algoFn = () => {
+    p.t = 0;
+    p.controlsPackage = {};
+    p.statePackage = {};
+    p._algoFn = () => {
         return [];
     }
 
-    sketch.doUpdate = function (controlsPackage, statePackage, algoFn) {
+    p.vvv = 0.1;
 
-        t = 0;
-        controlsPackage = controlsPackage;
-        statePackage = statePackage;
-        algoFn = algoFn;
+    p.doUpdate = function (controlsPackage, statePackage, algoFn, isTemp = false) {
+        p.t = 0;
+        p.controlsPackage = controlsPackage;
+        p.statePackage = statePackage;
+        p._algoFn = algoFn;
     }
 
-    sketch.draw = function () {
-        sketch.background(0);
-        sketch.fill(255);
-        sketch.rect(x, y, 5, 50);
+    p.draw = function () {
+        const { temp, perm } = p._algoFn(p.t, p.controlsPackage, p.statePackage, p);
+        perm.forEach(v => v(p.perm));
 
-        algoFn(t, controlsPackage, statePackage, sketch).forEach(v => v(sketch));
+        p.temp.clear();
+        temp.forEach(v => v(p.temp));
+
+        p.clear();
+        p.image(p.temp, 0, 0);
+        p.image(p.perm, 0, 0);
+
+        p.t++;
     };
 };
 

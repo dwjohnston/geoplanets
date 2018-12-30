@@ -1,3 +1,13 @@
 export default (cp, size) => (p5) => {
-    p5.circle(cp.x, cp.y, size * p5.width, size * p5.height, p5.TWO_PI);
+
+
+    p5.stroke(cp.color);
+    p5.fill(cp.color);
+
+    p5.ellipse(
+        Math.round(cp.x * p5.width),
+        Math.round(cp.y * p5.height),
+        Math.round(size * p5.width),
+        Math.round(size * p5.height),
+    );
 }

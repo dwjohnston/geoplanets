@@ -1,1 +1,1 @@
-export const SPEED_ADJUST = 0.02; 
+export const SPEED_ADJUST = 0.002; 

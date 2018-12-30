@@ -34,11 +34,13 @@ class Canvas extends Component {
         import("p5").then((p5) => {
             console.log(p5);
             console.log(this.refPaint);
-            this.canvas = new p5.default(sketch, this.refPaint.current);
-            this.canvas.doUpdate(
+            this.canvasPaint = new p5.default(sketch, this.refPaint.current);
+
+
+            this.canvasPaint.doUpdate(
                 this.props.controlPackage,
                 this.props.statePackage,
-                this.props.algorithms[this.props.selectedAlgo].calc
+                this.props.algorithms[this.props.selectedAlgo]
             );
         });
 
@@ -46,11 +48,14 @@ class Canvas extends Component {
     }
 
     componentWillReceiveProps(props, newProps) {
-        this.canvas.doUpdate(
-            newProps.controlPackage,
-            newProps.statePackage,
-            this.props.algorithms[newProps.selectedAlgo].calc
+
+        console.log(this, props, newProps);
+        this.canvasPaint.doUpdate(
+            props.controlPackage,
+            props.statePackage,
+            this.props.algorithms[props.selectedAlgo]
         );
+
     }
 
 
@@ -59,6 +64,7 @@ class Canvas extends Component {
         const { classes } = this.props;
         return <div className={classes.root}>
             <div className={classes.canvas} ref={this.refPaint}></div>
+
         </div >;
     }
 }
@@ -80,8 +86,8 @@ const mapStateToProps = (
     ownProps
 ) => {
     return {
-        controlPackage: state.controlPackage,
-        statePackage: state.statePackage,
+        controlPackage: state.controlState,
+        statePackage: state.stateState,
         selectedAlgo: state.algorithm.selectedAlgo,
     };
 };

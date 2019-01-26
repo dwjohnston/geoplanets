@@ -36,6 +36,8 @@ class Controls extends Component {
     }
 
     handleParameterChange = (id, v) => {
+
+        console.log(id, v);
         this.props.updateParameter([this.props.algorithms[this.state.selectedAlgo].groups[this.state.selectedTab - 1].id, ...id], v);
     }
 
@@ -96,7 +98,7 @@ class Controls extends Component {
                     (v, i) => <Control
                         key={`${i}-${tab.id}-${v.id}`}
                         value={v}
-                        initValue={this.props.controlState[tab.id][v.id]}
+                        initialValue={this.props.controlState[tab.id][v.id]}
                         onChange={this.handleParameterChange} />
                 )
                 }

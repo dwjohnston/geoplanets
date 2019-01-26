@@ -1,5 +1,5 @@
 import { zeroToOne } from "./generic";
-import { RANGE } from "./ValueTypes";
+import { RANGE, RGBA } from "./ValueTypes";
 
 export const singleColor = (id) => ({
     min: 0,
@@ -11,11 +11,17 @@ export const singleColor = (id) => ({
     label: id,
     type: RANGE,
 
+
 });
 
-export default () => ([
-    singleColor("r"),
-    singleColor("g"),
-    singleColor("b"),
-    zeroToOne("a", "a"),
-]); 
+export default (id = "color") => (
+    {
+        type: RGBA,
+        id,
+        renderHint: [
+            singleColor("r"),
+            singleColor("g"),
+            singleColor("b"),
+            zeroToOne("a", "a"),
+        ]
+    }); 

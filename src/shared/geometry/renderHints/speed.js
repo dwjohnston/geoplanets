@@ -1,5 +1,5 @@
 import { RANGE } from "./ValueTypes";
-export default () => ([{
+export default () => ({
     min: -100,
     max: 100,
     step: 1,
@@ -9,4 +9,4 @@ export default () => ([{
     label: "Speed",
     type: RANGE,
 
-}])
+})

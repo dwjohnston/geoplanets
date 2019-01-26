@@ -15,8 +15,6 @@ const s = function (p) {
         return [];
     }
 
-    p.vvv = 0.1;
-
     p.doUpdate = function (controlsPackage, statePackage, algoFn, isTemp = false) {
         p.t = 0;
         p.controlsPackage = controlsPackage;

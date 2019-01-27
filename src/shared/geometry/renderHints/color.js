@@ -14,7 +14,7 @@ export const singleColor = (id) => ({
 
 });
 
-export default (id = "color") => (
+export default (id = "color", alpha = singleColor("a")) => (
     {
         type: RGBA,
         id,
@@ -22,6 +22,7 @@ export default (id = "color") => (
             singleColor("r"),
             singleColor("g"),
             singleColor("b"),
-            zeroToOne("a", "a"),
+            //zeroToOne("a", "a"),
+            alpha,
         ]
     }); 

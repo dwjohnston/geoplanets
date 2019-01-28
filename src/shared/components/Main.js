@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Controls from "./Controls/Controls";
 import ThreeOrbits from '../geometry/algorithms/ThreeOrbits';
 import NoSSR from "react-no-ssr";
+import Video from './Video/Video';
 const algorithms = [
     ThreeOrbits
 ]
@@ -13,9 +14,13 @@ const algorithms = [
 function Main({ classes }) {
     return (<div className={classes.root}>
         <NoSSR>
-            <Canvas
-                algorithms={algorithms.map(v => v.calc)}
-            />
+            <div className={classes.canvasContainer}>
+                <Canvas
+                    algorithms={algorithms.map(v => v.calc)}
+                />
+                <Video />
+            </div>
+
         </NoSSR>
         <Controls algorithms={algorithms.map(v => v.renderHint)} />
     </div>)
@@ -29,6 +34,12 @@ const styles = theme => ({
         flexFlow: "column nowrap",
         alignItems: "stretch",
         height: "100vh",
+    },
+
+    canvasContainer: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        justifyContent: "space-between",
     },
 
     card: {

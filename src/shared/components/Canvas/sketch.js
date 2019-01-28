@@ -1,3 +1,4 @@
+
 const s = function (p) {
 
     p.setup = function () {
@@ -5,7 +6,24 @@ const s = function (p) {
         p.background(0);
         p.temp = p.createGraphics(200, 200);
         p.perm = p.createGraphics(200, 200);
+
+
+        const constraints = {
+            video: {
+                // mandatory: {
+                //     width: N_GRID_PIXELS,
+                //     height: N_GRID_PIXELS,
+                //     resizeMode: 'crop-and-scale',
+                // },
+
+
+            },
+            audio: false,
+
+        }
     };
+
+
 
 
     p.t = 0;

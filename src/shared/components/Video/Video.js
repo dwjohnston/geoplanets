@@ -2,17 +2,13 @@ import React, {
     Component,
 } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { randomInt } from "davids-toolbox";
 import { connect } from 'react-redux';
-import sketch from "./sketch";
+import sketch from "./videoFlow";
 
-class Canvas extends Component {
+class VideoCanvas extends Component {
     constructor(props) {
         super(props);
-
-        this.refTemp = React.createRef();
         this.refPaint = React.createRef();
-
         this.state = {
         };
 
@@ -26,20 +22,20 @@ class Canvas extends Component {
 
     componentDidMount() {
         this.canvasPaint = new p5(sketch, this.refPaint.current);
-        this.canvasPaint.doUpdate(
-            this.props.controlPackage,
-            this.props.statePackage,
-            this.props.algorithms[this.props.selectedAlgo]
-        );
+        // this.canvasPaint.doUpdate(
+        //     this.props.controlPackage,
+        //     this.props.statePackage,
+        //     this.props.algorithms[this.props.selectedAlgo]
+        // );
     }
 
-    componentWillReceiveProps(props, newProps) {
-        this.canvasPaint.doUpdate(
-            props.controlPackage,
-            props.statePackage,
-            this.props.algorithms[props.selectedAlgo]
-        );
-    }
+    // componentWillReceiveProps(props, newProps) {
+    //     this.canvasPaint.doUpdate(
+    //         props.controlPackage,
+    //         props.statePackage,
+    //         this.props.algorithms[props.selectedAlgo]
+    //     );
+    // }
 
 
     render() {
@@ -47,7 +43,6 @@ class Canvas extends Component {
         const { classes } = this.props;
         return <div className={classes.root}>
             <div className={classes.canvas} ref={this.refPaint}></div>
-
         </div >;
     }
 }
@@ -69,9 +64,9 @@ const mapStateToProps = (
     ownProps
 ) => {
     return {
-        controlPackage: state.controlState,
-        statePackage: state.stateState,
-        selectedAlgo: state.algorithm.selectedAlgo,
+        // controlPackage: state.controlState,
+        // statePackage: state.stateState,
+        // selectedAlgo: state.algorithm.selectedAlgo,
     };
 };
 
@@ -83,4 +78,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(Canvas));
+)(withStyles(styles)(VideoCanvas));

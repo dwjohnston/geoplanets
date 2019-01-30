@@ -10,21 +10,27 @@ const colorFn = (v) => {
 
 const speedFn = (v) => {
 
-    return (v - 50) * 2;
+    return (v - 50) * 20;
 }
 
 const distanceFn = (v) => {
 
-    return v / 200;
+    return 0.1 + (v / 200);
 }
 
 const linkFn = (v) => {
-    return Math.ceil(v);
+    return 1 + Math.ceil(v);
 }
 
 const pulseFn = (v) => {
 
-    return Math.ceil(v);
+    return 10 + Math.ceil(v);
+}
+
+
+const opacityFn = (v) => {
+    return Math.floor((v * 255) / 1000);
+
 }
 
 const map = {
@@ -44,17 +50,17 @@ const map = {
                 fn: colorFn
             },
             3: {
-                id: ["bgColor", "r"],
+                id: ["bgColor", "g"],
 
                 fn: colorFn
             },
             4: {
-                id: ["bgColor", "r"],
+                id: ["bgColor", "b"],
                 fn: colorFn
             },
             5: {
-                id: ["bgColor", "r"],
-                fn: colorFn
+                id: ["bgColor", "a"],
+                fn: opacityFn
             },
         }
     },

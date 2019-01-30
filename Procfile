@@ -1,0 +1,1 @@
+web: npm run build && cd public && node index.js 

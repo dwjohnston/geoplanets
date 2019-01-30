@@ -68,7 +68,7 @@ class Controls extends Component {
         if (selectedTab === 0) return (
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="algorithm-select">Algorithm</InputLabel>
-                {JSON.stringify(controlState)}
+                {/* {JSON.stringify(controlState)} */}
                 <Select
                     value={selectedAlgo}
                     onChange={this.handleAlgoChange}
@@ -83,6 +83,10 @@ class Controls extends Component {
                         </MenuItem>
                     ))}
                 </Select>
+
+                <p>
+                    Nb. These tab controls shouldn't be used. They were here for testing. The animation is being controlled by the video.
+               </p>
 
             </FormControl>
         )

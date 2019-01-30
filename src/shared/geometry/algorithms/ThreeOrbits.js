@@ -57,9 +57,9 @@ function calc(t, cp, sp) {
             ],
             perm: [
                 degrade,
-                circle(cp1, 0.025),
-                circle(cp2, 0.025),
-                circle(cp3, 0.025),
+                circle(cp1, 0.005),
+                circle(cp2, 0.005),
+                circle(cp3, 0.005),
                 ...links,
             ]
         }

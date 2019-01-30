@@ -6,11 +6,10 @@ import Slider from '../generic/controls/Slider/Slider';
 import Rgba from "../generic/controls/Rgba/Rgba";
 
 const renderControl = (value, rest) => {
-    console.log(value);
     switch (value.type) {
-    case ValueType.RANGE: return (<Slider {...value} {...rest} />);
-    case ValueType.RGBA: return (<Rgba {...value} {...rest} />);
-    default: return <span>error, type no recognised </span>
+        case ValueType.RANGE: return (<Slider {...value} {...rest} />);
+        case ValueType.RGBA: return (<Rgba {...value} {...rest} />);
+        default: return <span>error, type no recognised </span>
     }
 }
 

@@ -4,6 +4,7 @@ import React, {
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import sketch from "./videoFlow";
+import { videoUpdate } from '../../redux/actions/videoChange';
 
 class VideoCanvas extends Component {
     constructor(props) {
@@ -22,11 +23,9 @@ class VideoCanvas extends Component {
 
     componentDidMount() {
         this.canvasPaint = new p5(sketch, this.refPaint.current);
-        // this.canvasPaint.doUpdate(
-        //     this.props.controlPackage,
-        //     this.props.statePackage,
-        //     this.props.algorithms[this.props.selectedAlgo]
-        // );
+        this.canvasPaint.init(
+            this.props.videoUpdate,
+        );
     }
 
     // componentWillReceiveProps(props, newProps) {
@@ -72,7 +71,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        videoUpdate: (payload) => dispatch(videoUpdate(payload))
     };
 };
 export default connect(

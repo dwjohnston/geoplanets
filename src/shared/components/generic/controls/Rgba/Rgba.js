@@ -14,9 +14,6 @@ class Rgba extends Component {
 
 
     onChange = (id, v) => {
-        console.log(id, v);
-        console.log(this.state);
-
         this.setState({
             [id]: v
         }, () => {
@@ -27,12 +24,6 @@ class Rgba extends Component {
 
     render() {
 
-        console.log(this.props);
-
-        console.log(this.state);
-        console.log(xolor(Object.values(this.state)))
-        console.log(xolor(this.state))
-        console.log(xolor(this.state).css)
         const { value, classes } = this.props;
         return <Card elevation={2} className={classes.root}>
 

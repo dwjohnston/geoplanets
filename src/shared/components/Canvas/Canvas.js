@@ -9,10 +9,7 @@ import sketch from "./sketch";
 class Canvas extends Component {
     constructor(props) {
         super(props);
-
-        this.refTemp = React.createRef();
         this.refPaint = React.createRef();
-
         this.state = {
         };
 

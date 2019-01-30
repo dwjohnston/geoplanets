@@ -34,7 +34,7 @@ const s = function (p) {
     }
 
     p.doUpdate = function (controlsPackage, statePackage, algoFn, isTemp = false) {
-        p.t = 0;
+        //p.t = 0;
         p.controlsPackage = controlsPackage;
         p.statePackage = statePackage;
         p._algoFn = algoFn;

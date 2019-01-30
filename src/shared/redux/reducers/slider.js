@@ -9,12 +9,12 @@ export default (
     action
 ) => {
     switch (action.type) {
-        case SLIDER_UPDATE: {
-            return set(cloneDeep(state), action.payload.id.join("."), action.payload.value)
-        }
+    case SLIDER_UPDATE: {
+        return set(cloneDeep(state), action.payload.id.join("."), action.payload.value)
+    }
 
-        default: {
-            return initialState;
-        }
+    default: {
+        return state;
+    }
     }
 };

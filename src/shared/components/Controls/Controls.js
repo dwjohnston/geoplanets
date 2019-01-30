@@ -60,7 +60,7 @@ class Controls extends Component {
 
 
         const { selectedTab, selectedAlgo } = this.state;
-        const { algorithms } = this.props;
+        const { algorithms, controlState } = this.props;
 
 
 
@@ -68,7 +68,7 @@ class Controls extends Component {
         if (selectedTab === 0) return (
             <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="algorithm-select">Algorithm</InputLabel>
-
+                {JSON.stringify(controlState)}
                 <Select
                     value={selectedAlgo}
                     onChange={this.handleAlgoChange}

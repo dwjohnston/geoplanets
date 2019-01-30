@@ -18,7 +18,7 @@ const ARRAY_TRANSPARENT = [0, 0, 0, 0];
 // //const ARRAY_TRANSPARENT = [0, 0, 0, 0];
 
 
-
+const CANVAS_SIZE = 500;
 
 
 // var capture;
@@ -233,7 +233,7 @@ function buildDiffArray(prevDiff) {
 const s = function (p) {
 
     p.setup = function () {
-        p.createCanvas(200, 200);
+        p.createCanvas(CANVAS_SIZE, CANVAS_SIZE);
         p.background(0);
         const constraints = {
             video: {
@@ -251,7 +251,7 @@ const s = function (p) {
         p.capture = p.createCapture(constraints, p.VIDEO);
         p.capture.hide();
 
-        gridWidth = (200 - (N_GRIDS_WIDE - 1) * GRID_GAP_PIXELS) / N_GRIDS_WIDE;
+        gridWidth = (CANVAS_SIZE - (N_GRIDS_WIDE - 1) * GRID_GAP_PIXELS) / N_GRIDS_WIDE;
         pixelSize = gridWidth / N_GRID_PIXELS;
 
         createBlankImage = createBlankImage.bind(p);

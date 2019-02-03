@@ -1,1 +1,1 @@
-web: npm run build && cd public && node index.js 
+web: npm run build &&  node public/index.js 

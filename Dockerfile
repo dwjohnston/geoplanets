@@ -13,10 +13,9 @@ COPY . /usr/src/app
 RUN npm run build
 
 FROM node:10.15-alpine
-RUN node -v 
 COPY --from=builder /usr/src/app /usr/app
-EXPOSE 80
+#EXPOSE $PORT
 #CMD ["nginx", "-g", "daemon off;"]
-ENV PORT 80
+##ENV PORT $PORT
 CMD ["node", "/usr/app/public/index.js"]
 #CMD ["ls", "/usr/public"]

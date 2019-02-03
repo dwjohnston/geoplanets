@@ -1,1 +1,1 @@
-web: npm run build &&  node public/index.js 
+web: npm install -g npm-run-all && npm run build &&  node public/index.js 

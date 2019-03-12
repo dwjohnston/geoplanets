@@ -5,13 +5,24 @@ import xolor from "xolor";
 import gradientLine from "../../draw/gradientLine";
 import getStandardLinkRate from "../subalgorithms/linkRate";
 import blankSlate from "../../draw/blankSlate";
+
+
+
+
+const linkRatePack = getStandardLinkRate();
+const p1Pack = getStandardPlanet("p1");
+const p2Pack = getStandardPlanet("p2");
+const p3Pack = getStandardPlanet("p3");
+
+const standardPlanetCalc = p1Pack.calc;
+
 const renderHint = {
     name: "Three Orbits",
     groups: [
-        getStandardLinkRate().renderHint,
-        getStandardPlanet("p1").renderHint,
-        getStandardPlanet("p2").renderHint,
-        getStandardPlanet("p3").renderHint,
+        linkRatePack.renderHint,
+        p1Pack.renderHint,
+        p2Pack.renderHint,
+        p3Pack.renderHint,
     ]
 }
 
@@ -24,43 +35,25 @@ const renderHint = {
 function calc(t, cp, sp) {
 
     if (cp.p1) {
-        const cp1 = roundOrbit(t, cp.p1.speed, cp.p1.distance);
-        cp1.color = xolor(Object.values(cp.p1.color)).css;
-        const cp2 = roundOrbit(t, cp.p2.speed, cp.p2.distance, cp1);
-        cp2.color = xolor(cp.p2.color).css;
-        const cp3 = roundOrbit(t, cp.p3.speed, cp.p3.distance, cp2);
-        cp3.color = xolor(cp.p3.color).toString();
+        const p1 = standardPlanetCalc(t, cp.p1);
+        const p2 = standardPlanetCalc(t, cp.p2, p1.data);
+        const p3 = standardPlanetCalc(t, cp.p3, p2.data);
 
         // Work out whether the lines should be drawn. 
-        const { linkRate, pulseRate } = cp.link;
-        const links = [];
-        const isPulse = (Math.floor(t / pulseRate)) % 2 === 0;
-        if (isPulse) {
-            const isLink = (t % linkRate === 0);
-            if (isLink) {
-                links.push(
-                    gradientLine(cp1, cp2),
-                    gradientLine(cp2, cp3),
-                    gradientLine(cp1, cp3)
-                );
-            }
-        }
-
-        // Create the degrade layer
-        const degrade = blankSlate(cp.link.bgColor);
+        const links = linkRatePack.calc(t, cp.link, [p1.data, p2.data, p3.data]);
 
         return {
             temp: [
-                circle(cp1, 0.05),
-                circle(cp2, 0.05),
-                circle(cp3, 0.05),
+                ...p1.temp,
+                ...p2.temp,
+                ...p3.temp
             ],
             perm: [
-                degrade,
-                circle(cp1, 0.025),
-                circle(cp2, 0.025),
-                circle(cp3, 0.025),
-                ...links,
+                ...links.perm,
+
+                ...p1.perm,
+                ...p2.perm,
+                ...p3.perm,
             ]
         }
     }

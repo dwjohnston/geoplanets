@@ -2,7 +2,6 @@ import React, {
     Component,
 } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { randomInt } from "davids-toolbox";
 import { connect } from 'react-redux';
 import sketch from "./sketch";
 
@@ -20,16 +19,11 @@ class Canvas extends Component {
     }
 
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    // shouldComponentUpdate() {
+    //     return false;
+    // }
 
     componentDidMount() {
-
-        // const draw = () => {
-        //     window.requestAnimationFrame(draw);
-        // }
-        // window.requestAnimationFrame(draw);
 
         import("p5").then((p5) => {
             console.log(p5);
@@ -47,20 +41,21 @@ class Canvas extends Component {
 
     }
 
-    componentWillReceiveProps(props, newProps) {
+    componentDidUpdate(prevProps) {
 
-        console.log(this, props, newProps);
-        this.canvasPaint.doUpdate(
-            props.controlPackage,
-            props.statePackage,
-            this.props.algorithms[props.selectedAlgo]
-        );
+        if (this.props.controlPackage != prevProps.controlPackage || this.props.selectedAlgo != prevProps.selectedAlgo) {
+            this.canvasPaint.doUpdate(
+                this.props.controlPackage,
+                this.props.statePackage,
+                this.props.algorithms[this.props.selectedAlgo]
+            );
+
+        }
 
     }
 
 
     render() {
-
         const { classes } = this.props;
         return <div className={classes.root}>
             <div className={classes.canvas} ref={this.refPaint}></div>

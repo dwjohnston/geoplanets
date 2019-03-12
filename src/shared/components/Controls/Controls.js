@@ -50,9 +50,12 @@ class Controls extends Component {
     handleAlgoChange = (event) => {
         this.setState({
             selectedAlgo: event.target.value
+        }, () => {
+            this.props.updateSelectedAlgo(event.target.value);
+            this.randomAll();
+
         });
 
-        this.props.updateSelectedAlgo(event.target.value);
 
     }
 
@@ -105,7 +108,6 @@ class Controls extends Component {
             </>);
         }
 
-        return (<span> nohthing </span >);
     }
 
     // handleChange = (e, v) => {

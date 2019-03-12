@@ -5,9 +5,11 @@ import Canvas from "./Canvas/Canvas";
 import { connect } from "react-redux";
 import Controls from "./Controls/Controls";
 import ThreeOrbits from '../geometry/algorithms/ThreeOrbits';
+import LfoOrbits from "../geometry/algorithms/DoubleLfoPlanet";
 import NoSSR from "react-no-ssr";
 const algorithms = [
-    ThreeOrbits
+    ThreeOrbits,
+    LfoOrbits
 ]
 
 function Main({ classes }) {

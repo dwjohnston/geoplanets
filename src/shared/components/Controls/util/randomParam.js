@@ -1,4 +1,4 @@
-import { RANGE, RGBA } from "../../../geometry/renderHints/ValueTypes";
+import { RANGE, RGBA, LFO } from "../../../geometry/renderHints/ValueTypes";
 import { randomStep } from "davids-toolbox";
 
 export default (control) => {
@@ -14,6 +14,13 @@ export default (control) => {
         }, {});
         return color;
 
+    }
+
+    case LFO: {
+        return control.renderHint.reduce((acc, cur) => {
+            acc[cur.id] = randomStep(cur.randMin, cur.randMax, cur.step);
+            return acc;
+        }, {});
     }
     default: return 0;
     }

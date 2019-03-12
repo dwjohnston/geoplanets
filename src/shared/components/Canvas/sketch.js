@@ -15,7 +15,7 @@ const s = function (p) {
         return [];
     }
 
-    p.doUpdate = function (controlsPackage, statePackage, algoFn, isTemp = false) {
+    p.doUpdate = function (controlsPackage, statePackage, algoFn) {
         p.t = 0;
         p.controlsPackage = controlsPackage;
         p.statePackage = statePackage;
@@ -23,17 +23,24 @@ const s = function (p) {
     }
 
     p.draw = function () {
-        const { temp, perm } = p._algoFn(p.t, p.controlsPackage, p.statePackage, p);
-        perm.forEach(v => v(p.perm));
 
-        p.temp.clear();
-        temp.forEach(v => v(p.temp));
+        try {
+            const { temp, perm } = p._algoFn(p.t, p.controlsPackage, p.statePackage, p);
+            perm.forEach(v => v(p.perm));
 
-        p.clear();
-        p.image(p.temp, 0, 0);
-        p.image(p.perm, 0, 0);
+            p.temp.clear();
+            temp.forEach(v => v(p.temp));
 
-        p.t++;
+            p.clear();
+            p.image(p.temp, 0, 0);
+            p.image(p.perm, 0, 0);
+
+            p.t++;
+
+        } catch (err) {
+            console.error(err);
+        }
+
     };
 };
 

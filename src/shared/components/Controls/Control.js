@@ -4,12 +4,14 @@ import { Card } from '@material-ui/core';
 import * as ValueType from "../../geometry/renderHints/ValueTypes";
 import Slider from '../generic/controls/Slider/Slider';
 import Rgba from "../generic/controls/Rgba/Rgba";
+import Lfo from "../generic/controls/Lfo/Lfo";
 
 const renderControl = (value, rest) => {
     console.log(value);
     switch (value.type) {
     case ValueType.RANGE: return (<Slider {...value} {...rest} />);
     case ValueType.RGBA: return (<Rgba {...value} {...rest} />);
+    case ValueType.LFO: return (<Lfo {...value} {...rest} />);
     default: return <span>error, type no recognised </span>
     }
 }

@@ -7,10 +7,24 @@ export const zeroToOne = (id, label, max = 1, step = 0.01, randMin, randMax) => 
     id: id,
     randMin: randMin || 0.1 * max,
     randMax: randMax || 0.9 * max,
-    label,
+    label: label || id,
     type: RANGE,
 
 });
+
+export const minToMax = (id, label, min = 0, max = 1, step = 0.01, randMin, randMax) => (
+    {
+        min: min,
+        max: max,
+        step: step,
+        id: id,
+        randMin: randMin || 0.1 * max,
+        randMax: randMax || 0.9 * max,
+        label,
+        type: RANGE,
+
+    }
+);
 
 export const negativeToPositive = (id, label, max, step, randMin, randMax) => ({
     min: -1 * max,

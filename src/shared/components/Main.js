@@ -8,9 +8,13 @@ import ThreeOrbits from '../geometry/algorithms/ThreeOrbits';
 import LfoOrbits from "../geometry/algorithms/DoubleLfoPlanet";
 import NoSSR from "react-no-ssr";
 import TwoSnakes from '../geometry/algorithms/TwoSnakes';
+import SineGenerator from '../geometry/algorithms/SineGenerator';
 const algorithms = [
     ThreeOrbits,
     LfoOrbits,
+
+    SineGenerator,
+
 
 
     //TwoSnakes, //State updates aren't working

@@ -16,7 +16,7 @@ const calc = (t, cp, sp) => {
         const p2 = planetCalc(t, cp.p2, p1.data);
 
         // Work out whether the lines should be drawn. 
-        const links = linkPack.calc(t, cp.link, [p1.data, p2.data]);
+        const links = linkPack.calc(t, cp, [p1.data, p2.data]);
 
         return {
             temp: [
@@ -28,7 +28,8 @@ const calc = (t, cp, sp) => {
 
                 ...p1.perm,
                 ...p2.perm,
-            ]
+            ], 
+            data: [], 
         }
     }
 

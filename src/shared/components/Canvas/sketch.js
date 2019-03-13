@@ -15,6 +15,14 @@ const s = function (p) {
         return [];
     }
 
+    p.init = function (controlsPackage, statePackage, algoFn, updateState) {
+        p.t = 0;
+        p.controlsPackage = controlsPackage;
+        p.statePackage = statePackage;
+        p._algoFn = algoFn;
+        p._updateState = updateState;
+    }
+
     p.doUpdate = function (controlsPackage, statePackage, algoFn) {
         p.t = 0;
         p.controlsPackage = controlsPackage;
@@ -23,10 +31,10 @@ const s = function (p) {
     }
 
     p.draw = function () {
-
         try {
-            const { temp, perm } = p._algoFn(p.t, p.controlsPackage, p.statePackage, p);
+            const { temp, perm, data } = p._algoFn(p.t, p.controlsPackage, p.statePackage, p);
             perm.forEach(v => v(p.perm));
+            //p._updateState(data); //For some reason, updating the state is clobbaring the existing control state
 
             p.temp.clear();
             temp.forEach(v => v(p.temp));

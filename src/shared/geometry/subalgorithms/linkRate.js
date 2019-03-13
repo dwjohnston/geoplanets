@@ -16,7 +16,9 @@ function getStandardLinkRate(id = "link", label = "link", icon = "invert_colors"
          * Presumably, we can extend this later, to allow us to other linking strategies, rather than just 'link all'. 
          */
         calc: (t, cp, items) => {
-            const { linkRate, pulseRate } = cp;
+
+            const controls = cp[id];
+            const { linkRate, pulseRate } = controls;
             const links = [];
             const isPulse = (Math.floor(t / pulseRate)) % 2 === 0;
             if (isPulse) {
@@ -33,7 +35,7 @@ function getStandardLinkRate(id = "link", label = "link", icon = "invert_colors"
             }
 
             return {
-                perm: [blankSlate(cp.bgColor), ...links,],
+                perm: [blankSlate(controls.bgColor), ...links,],
                 temp: [],
             }
         },

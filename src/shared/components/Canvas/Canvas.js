@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { updateState } from "../../redux/actions/updateState";
 import sketch from "./sketch";
 
 class Canvas extends Component {
@@ -31,10 +32,11 @@ class Canvas extends Component {
             this.canvasPaint = new p5.default(sketch, this.refPaint.current);
 
 
-            this.canvasPaint.doUpdate(
+            this.canvasPaint.init(
                 this.props.controlPackage,
                 this.props.statePackage,
-                this.props.algorithms[this.props.selectedAlgo]
+                this.props.algorithms[this.props.selectedAlgo],
+                this.props.updateState,
             );
         });
 
@@ -43,11 +45,17 @@ class Canvas extends Component {
 
     componentDidUpdate(prevProps) {
 
-        if (this.props.controlPackage != prevProps.controlPackage || this.props.selectedAlgo != prevProps.selectedAlgo) {
+        if ((this.props.controlPackage != prevProps.controlPackage
+            || this.props.selectedAlgo != prevProps.selectedAlgo
+            || this.props.statePackage != prevProps.statePackage
+        ) && this.canvasPaint) {
+
+            console.log("update");
             this.canvasPaint.doUpdate(
                 this.props.controlPackage,
                 this.props.statePackage,
-                this.props.algorithms[this.props.selectedAlgo]
+                this.props.algorithms[this.props.selectedAlgo],
+                this.props.updateState,
             );
 
         }
@@ -89,7 +97,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        updateState: data => dispatch(updateState(data))
     };
 };
 export default connect(

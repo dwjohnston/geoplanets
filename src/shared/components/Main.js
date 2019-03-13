@@ -7,9 +7,13 @@ import Controls from "./Controls/Controls";
 import ThreeOrbits from '../geometry/algorithms/ThreeOrbits';
 import LfoOrbits from "../geometry/algorithms/DoubleLfoPlanet";
 import NoSSR from "react-no-ssr";
+import TwoSnakes from '../geometry/algorithms/TwoSnakes';
 const algorithms = [
     ThreeOrbits,
-    LfoOrbits
+    LfoOrbits,
+
+
+    //TwoSnakes, //State updates aren't working
 ]
 
 function Main({ classes }) {
@@ -18,8 +22,9 @@ function Main({ classes }) {
             <Canvas
                 algorithms={algorithms.map(v => v.calc)}
             />
+            <Controls algorithms={algorithms.map(v => v.renderHint)} />
         </NoSSR>
-        <Controls algorithms={algorithms.map(v => v.renderHint)} />
+
     </div>)
 }
 

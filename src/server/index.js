@@ -37,7 +37,10 @@ export default ({ clientStats }) => async (req, res) => {
         },
         algorithm: {
             selectedAlgo: 0
-        }
+        },
+        stateState: {
+
+        },
     };
     const store = configureStore(preloadedState);
 

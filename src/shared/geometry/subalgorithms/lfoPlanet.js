@@ -9,7 +9,9 @@ import lfoValue from "../functions/lfoValue";
 export default (id = "doublelfoplanet", label = "planet", icon = "all_out") => {
     const standardPlanetCalc = standardPlanet().calc; //Creating a closure for calc() to use. 
     return {
-        calc: (t, cp, center) => {
+        calc: (t, cp, center) => {      //nb big problem with the referencing to control package. 
+            //I really want it to be a curried selector
+            //But in this example, we want to use the calc function of something else
 
             return standardPlanetCalc(t, {
                 ...cp,

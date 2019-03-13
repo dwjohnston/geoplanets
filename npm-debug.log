@@ -12,7 +12,7 @@
 6 verbose stack     at _errnoException (util.js:1022:11)
 6 verbose stack     at WriteWrap.afterWrite [as oncomplete] (net.js:880:14)
 7 verbose cwd /home/davidj/git-workspace/geoplanets
-8 error Linux 4.15.0-43-generic
+8 error Linux 4.15.0-45-generic
 9 error argv "/usr/bin/node" "/usr/bin/npm" "ls" "--depth" "0" "--json"
 10 error node v8.10.0
 11 error npm  v3.5.2

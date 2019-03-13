@@ -40,7 +40,7 @@ function calc(t, cp, sp) {
         const p3 = standardPlanetCalc(t, cp.p3, p2.data);
 
         // Work out whether the lines should be drawn. 
-        const links = linkRatePack.calc(t, cp.link, [p1.data, p2.data, p3.data]);
+        const links = linkRatePack.calc(t, cp, [p1.data, p2.data, p3.data]);
 
         return {
             temp: [
@@ -54,12 +54,17 @@ function calc(t, cp, sp) {
                 ...p1.perm,
                 ...p2.perm,
                 ...p3.perm,
-            ]
+            ], 
+            data: [], 
         }
     }
 
 
-    return [];
+    return {
+        temp: [], 
+        perm: [], 
+        data: [], 
+    };
 
 
 
